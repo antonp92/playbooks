@@ -1,0 +1,13 @@
+--- # Instlaling lynx package on appserver
+- hosts: appserver
+  remote_user: ansible
+  become: yes
+  vars:
+    author_name: ansible user
+  vars_files:
+  - vars.yaml
+  tasks:
+  - name: Install lynx package
+    yum:
+      name: lynx
+      state: latest
