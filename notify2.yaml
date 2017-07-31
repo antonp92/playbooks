@@ -1,0 +1,12 @@
+--- # Notification and Handling events
+- hosts: apacheweb
+  remote_user: ansible
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: Install Apache Web Server
+      yum: name=httpd state=installed
+      notify: restart_httpd
+  handlers:
+    - name: restart_httpd
+      service: name=httpd state=restarted
