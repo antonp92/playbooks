@@ -11,4 +11,4 @@
   - include: commands/commands.yml
 
   handlers:
-  - include: handler/handler.yml 
+  - include: handlers/handlers.yml 
