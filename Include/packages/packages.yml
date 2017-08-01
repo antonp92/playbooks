@@ -1,0 +1,10 @@
+- name: Install Apache Web Server
+  yum: name=httpd state=latest
+  notify: restart_httpd
+
+- name: Install packages
+  yum: name={{ item }} state=present
+  with_items:
+    - telnet
+    - nano
+    - lynx
