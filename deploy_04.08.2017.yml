@@ -1,0 +1,22 @@
+--- # Exercise 1 playbook
+- hosts: apacheweb
+  user: ansible
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Install the lynx package
+    yum: name=lynx state=installed
+  - name: Verify if the telnet package is installed
+    command: yum list installed | grep telnet
+    register: result
+  - debug: var=result 
+
+- hosts: appserver
+  become: yes
+  user: ansible
+  gather_facts: no
+  tasks:
+  - name: Intall the lynx package
+    yum: name=lynx state=installed
+  - name: Querying for telnet install
+    yum: name=telnet state=present
