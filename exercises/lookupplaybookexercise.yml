@@ -1,0 +1,8 @@
+--- # Lookup playbook exercise
+- hosts: apacheweb
+  connection: ssh
+  user: ansible
+  become: yes
+  gather_facts: no
+  tasks:
+    - debug: msg="{{ lookup('env','HOME') }} is the HOME environment variable"
