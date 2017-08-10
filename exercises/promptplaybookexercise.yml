@@ -3,7 +3,7 @@
   connection: ssh
   user: ansible
   become: yes
-  gather_facts: no
+  gather_facts:
   vars:
     playbook_version: 1.0
   vars_prompt:
@@ -12,7 +12,15 @@
       default: telnet
    
   tasks: 
-    - name: Install the specified package
+    - name: Install the specified package on RedHat distros 
       yum:
-        name: {{ pkgtoinstall }}
+        name: '{{ pkgtoinstall }}'
         state: installed
+      when: ansible_os_family =="RedHat"
+
+
+    - name: Install the specified package on Debian distros
+      apt:
+        name: '{{ pkgtoinstall }}'
+        state: installed
+      when: ansible_os_family =="Debian"

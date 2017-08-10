@@ -1,0 +1,16 @@
+--- # Include playbook exercise
+- hosts: all
+  connection: ssh
+  user: ansible
+  become: yes
+  
+
+  tasks:
+    - include: plays/installtelnet.yml
+   
+    - name: Verify that telnet is running on Ubuntu
+      raw: dpkg -l | grep telnet > /home/ansible/pkgs.log
+      when: ansible_os_family == "Debian"
+    - name: Verify that telnet is running on CentOS
+      raw: yum list installed | grep telnet > /home/ansible/pkgs.log
+      when: ansible_os_family == "RedHat"
