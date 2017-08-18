@@ -1,0 +1,6 @@
+--- # Local Action Playbook
+- hosts: 127.0.0.1
+  connection: local
+  tasks: 
+    - name: Install the telnet client
+      yum: name=telnet state=latest

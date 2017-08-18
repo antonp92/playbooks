@@ -1,0 +1,13 @@
+--- # Run once playbook exercise
+- hosts: all
+  user: ansible
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Run the uptime command and log it to /home/ansible/uptime.log
+      raw: /usr/bin/uptime > /home/ansible/uptime.log
+   
+    - name: List the remote /var dir on apacheweb and pipe the output to /home/ansible/dir.list
+      raw: ls -l /var > /home/ansible/dir.list
+      run_once: true
+      delegate_to: 192.168.56.101

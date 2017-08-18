@@ -1,0 +1,16 @@
+--- # When playbook example
+- hosts: apacheweb:aptserver
+  connection: ssh
+  user: ansible
+  become: yes
+  tasks:
+    - name: Install Apache Web Server on RedHat distros
+      yum:
+        name: httpd
+        state: installed
+      when: ansible_os_family == "RedHat"
+    
+    - name: Install Apache Web Server on Debian distros
+      apt:
+        name: apache2
+      when: ansible_os_family == "Debian"

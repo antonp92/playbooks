@@ -1,0 +1,10 @@
+--- # Local action demo
+- hosts: apacheweb
+  user: ansible
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Ping the application server before we run our install
+    local_action: command ping -c 4 192.168.56.102
+  - name: Install Lynx on remote server
+    yum: name=lynx state=latest

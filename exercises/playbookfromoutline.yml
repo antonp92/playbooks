@@ -1,0 +1,33 @@
+--- # Playbook from LinuxAcademy outline
+- hosts: apacheweb
+  connection: ssh
+  user: ansible
+  become: yes
+  tasks:
+    - name: Pre-task timestamp
+      raw: /usr/bin/date > /home/ansible/timestamp_start.txt
+
+    - name: Install packages
+      yum:
+        name: '{{ item }}'
+        state: installed
+      with_items:
+        - httpd
+        - telnet
+        - lynx
+
+    - name: Restart the apache web service
+      service:
+        name: httpd
+        state: restarted
+    
+    - name: Verify that the apache web service is started
+      shell: systemctl status httpd
+      register: result
+    - debug: var=result 
+
+    - name: Capture a log of all installed packages on the system
+      raw: yum list installed > /home/ansible/installed.log
+
+    - name: Post-task timestamp
+      raw: /usr/bin/date > /home/ansible/timestamp_end.txt

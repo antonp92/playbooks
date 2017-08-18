@@ -1,0 +1,18 @@
+--- # Notify playbook exercise
+- hosts: apacheweb
+  connection: ssh
+  become: yes
+  user: ansible
+  gather_facts: no
+  tasks:
+    - name: Install Apache Web Server
+      yum:
+        name: httpd
+        state: installed
+      notify: restart_httpd
+
+  handlers:
+    - name: restart_httpd
+      service:
+        name: httpd
+        state: restarted

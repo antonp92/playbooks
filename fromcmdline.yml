@@ -1,0 +1,8 @@
+--- # Variables at a command line passing example
+- hosts: '{{ hosts }}'
+  user: '{{ user }}'
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Install some software
+    yum: name={{ pkg }} state=latest

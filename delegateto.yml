@@ -1,0 +1,11 @@
+--- # Delegate to function demo
+- hosts: apacheweb
+  become: yes
+  user: ansible
+  tasks:
+  - name: Run a remote ping on the application server
+    command: ping -c 4 192.168.56.102 >> /home/ansible/ping.log
+    delegate_to: localhost
+  - name: Install a package
+    yum: name=lynx state=latest
+    

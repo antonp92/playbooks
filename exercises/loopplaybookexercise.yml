@@ -1,0 +1,15 @@
+--- # Loop playbook exercise
+- hosts: apacheweb
+  connection: ssh
+  user: ansible
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Create a list of users on apacheweb
+      user: 
+        name: "{{ item }}" 
+        state: present 
+        group: wheel
+      with_items:
+        - testuser1
+        - testuser2

@@ -1,0 +1,26 @@
+--- # Prompt playbook exercise
+- hosts: all
+  connection: ssh
+  user: ansible
+  become: yes
+  gather_facts:
+  vars:
+    playbook_version: 1.0
+  vars_prompt:
+    - name: pkgtoinstall
+      prompt: Install which package?
+      default: telnet
+   
+  tasks: 
+    - name: Install the specified package on RedHat distros 
+      yum:
+        name: '{{ pkgtoinstall }}'
+        state: installed
+      when: ansible_os_family =="RedHat"
+
+
+    - name: Install the specified package on Debian distros
+      apt:
+        name: '{{ pkgtoinstall }}'
+        state: installed
+      when: ansible_os_family =="Debian"

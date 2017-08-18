@@ -1,0 +1,21 @@
+--- # Until playbook exercise
+- hosts: apacheweb
+  connection: ssh
+  user: ansible
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Install Apache Web Server
+      yum:
+        name: httpd
+        state: latest
+  
+    - name: Verify that the Apache web service is running
+      shell: systemctl status httpd
+      register: status
+      until: status.stdout.find("active (running)") != -1
+      retries: 5
+      delay: 5
+    - debug: var=status
+
+# The above example run the shell module recursively till the module’s result has “active (running)” in its stdout or the task has been retried for 5 times with a delay of 5 seconds. The default value for “retries” is 3 and “delay” is 5.

@@ -1,0 +1,11 @@
+- name: Install the telnet package on RedHat distros
+  yum:
+    name: telnet
+    state: installed
+  when: ansible_os_family == "RedHat"
+
+- name: Install the telnet package on Debian distros
+  apt:
+    name: telnet
+    state: installed
+  when: ansible_os_family == "Debian"  
