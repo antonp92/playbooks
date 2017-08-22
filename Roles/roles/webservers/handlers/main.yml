@@ -1,4 +1,13 @@
 - name: restart_httpd
   service:
-    name: httpd
+    name: '{{ redhat_apache }}'
     state: restarted
+  when: "ansible_os_family == 'RedHat'"
+  ignore_errors: yes
+
+- name: restart_apache2
+  service:
+    name: '{{ debian_apache }}'
+    state: restarted
+  when: "ansible_os_family == 'RedHat'"
+  ignore_errors: yes
