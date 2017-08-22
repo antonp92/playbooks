@@ -1,0 +1,6 @@
+--- # Master playbook for webservers
+- hosts: apacheweb
+  user: ansible
+  become: yes
+  roles:
+    - webservers
