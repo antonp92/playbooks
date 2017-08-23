@@ -13,3 +13,8 @@
   when: "ansible_os_family == 'Debian'"
   notify: restart_apache2
   ignore_errors: yes
+
+- debug:
+    msg: Need to install Telnet
+  when: "ansible_os_family == 'RedHat'"
+  notify: install_telnet

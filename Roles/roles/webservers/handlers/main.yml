@@ -11,3 +11,8 @@
     state: restarted
   when: "ansible_os_family == 'RedHat'"
   ignore_errors: yes
+
+- name: install_telnet
+  yum:
+    name: telnet
+    state: latest
