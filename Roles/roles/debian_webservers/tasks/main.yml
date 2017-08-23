@@ -1,0 +1,20 @@
+- name: Install the Apache Web Server on RedHat/CentOS
+  yum:
+    name: '{{ redhat_apache }}'
+    state: latest
+  when: "ansible_os_family == 'RedHat'"
+  notify: restart_httpd
+  ignore_errors: yes
+
+- name: Install the Apache Web Server on Debian/Ubuntu
+  apt:
+    name: '{{ debian_apache }}'
+    state: latest
+  when: "ansible_os_family == 'Debian'"
+  notify: restart_apache2
+  ignore_errors: yes
+
+- debug:
+    msg: Need to install Telnet
+  when: "ansible_os_family == 'RedHat'"
+  notify: install_telnet

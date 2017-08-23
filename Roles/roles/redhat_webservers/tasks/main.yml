@@ -1,0 +1,15 @@
+- name: Install the Apache Web Server on RedHat/CentOS
+  yum:
+    name: '{{ redhat_apache }}'
+    state: latest
+  when: "ansible_os_family == 'RedHat'"
+
+- name: Wait for the service to start listening on port 80
+  wait_for:
+    port: 80
+    state: started
+
+- debug:
+    msg: Need to install Telnet
+  when: "ansible_os_family == 'RedHat'"
+  notify: install_telnet
