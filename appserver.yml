@@ -11,4 +11,3 @@
     yum:
       name: lynx
       state: latest
-test
