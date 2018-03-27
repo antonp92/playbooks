@@ -1,4 +1,4 @@
---- # Instlaling lynx package on appserver
+--- # Instlaling lynx package on appserver test
 - hosts: appserver
   remote_user: ansible
   become: yes
